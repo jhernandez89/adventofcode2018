@@ -14,3 +14,12 @@ exports.convertToInt = function(array) {
     });
     return intArray;
 }
+
+exports.splitIntoLetters = function(data) {
+    let array = []
+    data.forEach(string => {
+        let splitString = string.split('');
+        array.push(splitString)
+    })
+    return array;
+}
