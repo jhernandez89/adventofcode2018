@@ -63,6 +63,13 @@ exports.getRidOfAllNonNum = function(data) {
         })
         newArray.push(exports.convertToInte(data))
     }
-    console.log(newArray)
+    return newArray;
+}
+
+exports.isolateArrayValue = function(data, index){
+    let newArray = [];
+    data.forEach(element => {
+        newArray.push(element[index])
+    })
     return newArray;
 }
