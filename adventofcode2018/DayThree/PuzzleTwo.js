@@ -21,7 +21,6 @@ function findAllOverlappingSquares(){
 }
 
 function findUniqueSquare(overlappingSquares){
-    let key = null
     for(let xyKey in xAndYValues){
         let overlap = false;
         let value = xAndYValues[xyKey]
