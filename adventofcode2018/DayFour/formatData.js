@@ -2,23 +2,18 @@ const reader = require('../readFromTextFile.js');
 formatter = module.exports = {}
 
 formatter.formatDataPuzzleOne = function(data){
-    const dataSplitRight = reader.splitAtChar(data, ']');
+    let dataSplitRight = reader.splitAtChar(data, ']');
     let dates = []
-    dataSplitRight.forEach(element => {
-        dates.push(element[0])
-    })
-    const datesSplitLeft = reader.splitAtChar(dates, '[');
-    const splitEvent = reader.splitBySpaces(dataSplitRight[1])
-    console.log(splitEvent)
-    let formattedData = [];
-    for (let index = 0; index < datesSplitLeft.length; index++) {
-        const date = datesSplitLeft[index][1];
-        // const event = dateSplitRight[index][1]
-        // formattedData.push(date, reader.splitBySpaces(event))
+    dates.push(dataSplitRight.map(x => x[0]))
+    let datesFormatted = reader.removeChar(dates[0], '\\[')
+    dataSplitRight = dataSplitRight.map(element => element[1].trim())
+    let gaurdNumberAndEvents = reader.getRidOfAllNonNum(dataSplitRight)
+    let timesArray = [0];
+    for (let index = 0; index < datesFormatted.length; index++) {
+        const time = datesFormatted[index];
+        const eventsAndGaurds = gaurdNumberAndEvents[index];
+        timesArray[index] = [time, eventsAndGaurds]
+        
     }
-
-    // const dataSplitLeft = reader.splitAtChar(dataSplitRight, '[')
-    function combineDateAndTime(dataSplit){
-
-    }
+    return timesArray
 }
