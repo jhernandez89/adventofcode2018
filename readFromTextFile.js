@@ -9,10 +9,14 @@ exports.readTextFile = function(file) {
 
 exports.convertToInt = function(array) {
     let intArray = [];
-    array.forEach(element => {
-        intArray.push(parseInt(element, 10));
-    });
-    return intArray;
+    if(array.constructor === Array){
+        array.forEach(element => {
+            intArray.push(parseInt(element, 10));
+        });
+        return intArray;
+    } else {
+        return parseInt(array, 10);
+    }
 }
 
 exports.splitIntoLetters = function(data) {
@@ -53,15 +57,20 @@ exports.getRidOfAllNonNum = function(data) {
     if(nestedArray){
         data.forEach(element => {
             element.forEach(item => {
-                item = item.replace(/\D/g,'');
+                if(/\d/.test(item))
+                    item = item.replace(/\D/g,'');
             })
             newArray.push(exports.convertToInt(element));
         })
     } else {
         data.forEach(element => {
-            element.replace(/\D/g,'');
+            if(/\d/.test(element)) {
+                element = element.replace(/\D/g,'');
+                newArray.push(exports.convertToInt(element))
+            } else {
+                newArray.push(element)
+            }
         })
-        newArray.push(exports.convertToInte(data))
     }
     return newArray;
 }
@@ -72,4 +81,17 @@ exports.isolateArrayValue = function(data, index){
         newArray.push(element[index])
     })
     return newArray;
+}
+
+exports.removeChar = function(data, char){
+    const regex = new RegExp(`${char}`, 'g')
+    if (data.constructor === Array) {
+        let newArray = [];
+        data.forEach(x => newArray.push(x.replace(regex, '')))
+        return newArray;
+    } else {
+        let newItem;
+        newArray.push(data.replace(regex, ''))
+        return newItem;
+    }
 }
